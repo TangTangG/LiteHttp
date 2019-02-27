@@ -21,7 +21,7 @@ public final class HttpTask {
             }
             executed = true;
         }
-        mHTTP.executePool().offer(new AsyncTask("", callback));
+        mHTTP.executePool().offer(new AsyncTask("demo", callback));
     }
 
     void cancel() {

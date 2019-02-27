@@ -1,3 +1,6 @@
+import com.sun.javaws.exceptions.InvalidArgumentException;
+
+import java.security.InvalidParameterException;
 
 public class HttpRequest {
     /**
@@ -142,6 +145,12 @@ public class HttpRequest {
         }
 
         HttpRequest build() {
+            if (!"GET".equalsIgnoreCase(method) && body == null) {
+                throw new InvalidParameterException("All method need a response body are required,except GET.");
+            }
+            if (headers == null) {
+                headers = new RequestHeaders.Builder().build();
+            }
             return new HttpRequest(this);
         }
     }

@@ -159,6 +159,7 @@ public class RequestUrl {
             // host[:port]
             int slashCount = slashCount(url, pos, limit);
             if (slashCount >= 2) {
+                pos += slashCount;
                 //find first delimiter char / \\ ? #
                 int firstDelimiter = delimiterOffset(url, pos, limit, "/\\?#");
                 int c = firstDelimiter == limit ? -1 : url.charAt(firstDelimiter);
@@ -186,7 +187,7 @@ public class RequestUrl {
 
             //extend path
             int pathDelimiterOffset = delimiterOffset(url, pos, limit, "?#");
-            if (pathDelimiterOffset < limit) {
+            if (pathDelimiterOffset <= limit) {
                 contact(url.substring(pos, pathDelimiterOffset));
             }
             pos = pathDelimiterOffset;
